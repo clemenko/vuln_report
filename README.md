@@ -1,5 +1,8 @@
 # vuln_report
 
+## Purpose
+This script is to scrape DTR for the vulnerability of each image:tag. Test it out!
+
 ## Edit the Script
 ```
 vim vuln_report.sh
