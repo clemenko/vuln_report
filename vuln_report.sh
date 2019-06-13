@@ -29,11 +29,11 @@ for i in $image_list; do
   if [ ! -z "$tag_list" ]; then 
     for x in $tag_list; do
      
-     critical=$(curl -skX GET -u admin:Pa22word "https://$dtr_server/api/v0/repositories/$i/tags/$x?pageSize=10&000count=false&includeManifests=false" -H 'accept: application/json' | jq -r '.[].vuln_summary.critical')
+     critical=$(curl -skX GET -u admin:$password "https://$dtr_server/api/v0/repositories/$i/tags/$x?pageSize=10&000count=false&includeManifests=false" -H 'accept: application/json' | jq -r '.[].vuln_summary.critical')
 
      if [[ $critical > 0 ]]; then echo -n "$RED"; fi
 
-     echo $i":"$x" "$NORMAL" "$(curl -skX GET -u admin:Pa22word "https://$dtr_server/api/v0/repositories/$i/tags/$x?pageSize=10&000count=false&includeManifests=false" -H 'accept: application/json' | jq -j '"Date: ", .[].vuln_summary.check_completed_at, " Critical: ", .[].vuln_summary.critical, " Major: ", .[].vuln_summary.major, " Minor: ", .[].vuln_summary.minor '; echo "") | column -t 
+     echo $i":"$x" "$NORMAL" "$(curl -skX GET -u admin:$password "https://$dtr_server/api/v0/repositories/$i/tags/$x?pageSize=10&000count=false&includeManifests=false" -H 'accept: application/json' | jq -j '"Date: ", .[].vuln_summary.check_completed_at, " Critical: ", .[].vuln_summary.critical, " Major: ", .[].vuln_summary.major, " Minor: ", .[].vuln_summary.minor '; echo "") | column -t 
       
     done 
   fi
